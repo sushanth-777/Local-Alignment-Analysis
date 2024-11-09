@@ -1,0 +1,182 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Title and author information
+\title{Comparative Analysis of Local Sequence Alignment Algorithms: BLAST, FASTA, and Smith-Waterman}
+\author{Sushanth Reddy Kotha, Durga Sai Surya Ram Saladi, Mayur Sai Yaram}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report provides a comparative analysis of three sequence alignment algorithms—BLAST, FASTA, and Smith-Waterman—based on criteria such as speed, sensitivity, accuracy, and use cases. The goal is to understand each algorithm’s suitability for specific types of local sequence alignments in bioinformatics.
+\end{abstract}
+
+\section{Introduction}
+Sequence alignment plays a crucial role in bioinformatics, helping identify similar regions between DNA or protein sequences. This report compares BLAST, FASTA, and Smith-Waterman to evaluate their performance on various criteria relevant to local sequence alignment.
+
+\section{Methods}
+\subsection{Dataset}
+Describe the dataset used, including the types and sources of DNA or protein sequences.
+
+\subsection{Tools}
+Explain each alignment tool:
+\begin{itemize}
+    \item \textbf{BLAST}: Overview and basic functionality.
+    \item \textbf{FASTA}: Description and working principles.
+    \item \textbf{Smith-Waterman}: Details of the exact pairwise alignment algorithm.
+\end{itemize}
+
+\subsection{Alignment Criteria}
+List the criteria used for comparison:
+\begin{itemize}
+    \item Algorithm type
+    \item Speed and efficiency
+    \item Alignment sensitivity
+    \item Accuracy
+    \item Use cases
+\end{itemize}
+
+\section{Results}
+Present your findings for each tool. Use tables or figures as needed.
+
+\section{Results}
+Present your findings for each tool. Use tables or figures as needed.
+
+\subsection{Score}
+Table \ref{table:score} shows the score values for each sequence across the three alignment tools: BLAST, FASTA, and Smith-Waterman.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Sequence} & \textbf{BLAST Score} & \textbf{FASTA Score} & \textbf{Smith-Waterman Score} \\
+    \hline
+    
+    BAAFST010000044.1 & 1729 & 222.1 & 90 \\
+    Sequence 2 & 78 & 75 & 88 \\
+    Sequence 3 & 92 & 89 & 95 \\
+    Sequence 4 & 80 & 78 & 85 \\
+    Sequence 5 & 87 & 84 & 91 \\
+    \hline
+\end{tabular}
+\caption{Score values for each alignment tool.}
+\label{table:score}
+\end{table}
+
+\subsection{Percentage Identity}
+Table \ref{table:identity} shows the percentage identity for each sequence across BLAST, FASTA, and Smith-Waterman.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Sequence} & \textbf{BLAST Identity (\%)} & \textbf{FASTA Identity (\%)} & \textbf{Smith-Waterman Identity (\%)} \\
+    \hline
+    BAAFST010000044.1 & 78.28\% & 41.5\% & 97\% \\
+    Sequence 2 & 89\% & 88\% & 90\% \\
+    Sequence 3 & 92\% & 90\% & 95\% \\
+    Sequence 4 & 85\% & 83\% & 89\% \\
+    Sequence 5 & 91\% & 90\% & 93\% \\
+    \hline
+\end{tabular}
+\caption{Percentage identity for each alignment tool.}
+\label{table:identity}
+\end{table}
+
+\subsection{E-value}
+Table \ref{table:evalue} presents the E-value for each sequence alignment across the three tools.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Sequence} & \textbf{BLAST E-value} & \textbf{FASTA E-value} & \textbf{Smith-Waterman E-value} \\
+    \hline
+    BAAFST010000044.1 & 0.0 & 6.1e-55 & 0.0001 \\
+    Sequence 2 & 0.005 & 0.008 & 0.002 \\
+    Sequence 3 & 0.0005 & 0.002 & 0.0002 \\
+    Sequence 4 & 0.007 & 0.010 & 0.005 \\
+    Sequence 5 & 0.002 & 0.006 & 0.001 \\
+    \hline
+\end{tabular}
+\caption{E-value for each alignment tool.}
+\label{table:evalue}
+\end{table}
+
+\subsection{Length of Alignment}
+Table \ref{table:length} shows the length of alignment for each sequence across the three tools.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Sequence} & \textbf{BLAST Length} & \textbf{FASTA Length} & \textbf{Smith-Waterman Length} \\
+    \hline
+    BAAFST010000044.1 & 4963 & 526 & 152 \\
+    Sequence 2 & 140 & 138 & 143 \\
+    Sequence 3 & 160 & 157 & 162 \\
+    Sequence 4 & 130 & 128 & 135 \\
+    Sequence 5 & 155 & 153 & 158 \\
+    \hline
+\end{tabular}
+\caption{Length of alignment for each alignment tool.}
+\label{table:length}
+\end{table}
+
+\subsection{Execution Time}
+Table \ref{table:time} presents the execution time for each sequence alignment across the three tools.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Sequence} & \textbf{BLAST Time (s)} & \textbf{FASTA Time (s)} & \textbf{Smith-Waterman Time (s)} \\
+    \hline
+    BAAFST010000044.1 & 0.5 & 0.7 & 1.2 \\
+    Sequence 2 & 0.4 & 0.6 & 1.1 \\
+    Sequence 3 & 0.6 & 0.8 & 1.3 \\
+    Sequence 4 & 0.5 & 0.7 & 1.0 \\
+    Sequence 5 & 0.7 & 0.9 & 1.4 \\
+    \hline
+\end{tabular}
+\caption{Execution time for each alignment tool.}
+\label{table:time}
+\end{table}
+
+\subsection{BLAST Analysis}
+Summarize results obtained from BLAST, including scores, E-values, identities, and positives.
+
+\subsection{FASTA Analysis}
+Summarize the findings from FASTA and compare them with BLAST results.
+
+\subsection{Smith-Waterman Analysis}
+Describe the results from Smith-Waterman pairwise alignments, focusing on sensitivity and accuracy.
+
+\section{Discussion}
+Compare the three methods based on the specified criteria. Discuss the strengths and limitations of each, highlighting when each tool is most appropriate.
+
+\section{Conclusion}
+Summarize the findings and recommend the appropriate use cases for each algorithm.
+
+\section{References}
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+    \bibitem{blast}
+    S. F. Altschul et al., "Basic local alignment search tool," Journal of Molecular Biology, vol. 215, no. 3, pp. 403–410, 1990.
+
+    \bibitem{fasta}
+    W. R. Pearson and D. J. Lipman, "Improved tools for biological sequence comparison," Proceedings of the National Academy of Sciences, vol. 85, no. 8, pp. 2444–2448, 1988.
+
+    \bibitem{smith_waterman}
+    T. F. Smith and M. S. Waterman, "Identification of common molecular subsequences," Journal of Molecular Biology, vol. 147, no. 1, pp. 195–197, 1981.
+\end{thebibliography}
+
+\end{document}
