@@ -1,0 +1,9 @@
+BLAST online tool: https://blast.ncbi.nlm.nih.gov/Blast.cgi
+-> Click on Nucleotide Blast to compare DNA sequences. CLick on Protein Blast to compare Protein sequences.
+-> Then either enter the sequence manually, or upload a .fasta file.
+-> Then BLAST it and note down the results. 
+-> Do this for all the test sequences.
+
+FASTA online tool: https://www.ebi.ac.uk/jdispatcher/sss/fasta
+
+Smith Waterman Online Tool: https://www.ebi.ac.uk/jdispatcher/psa/emboss_water?stype=dna&matrix=EDNAFULL
