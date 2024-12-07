@@ -1,173 +1,418 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
+\documentclass{article}
 \usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{pgfplots}
 \usepackage{hyperref}
-\usepackage{geometry}
-\geometry{margin=1in}
+\usepackage{titlesec}
+\usepackage{float}
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\abstractname}{\Large Abstract}
 
-% Title and author information
-\title{Comparative Analysis of Local Sequence Alignment Algorithms: BLAST, FASTA, and Smith-Waterman}
-\author{Sushanth Reddy Kotha, Durga Sai Surya Ram Saladi, Mayur Sai Yaram}
-\date{\today}
+\title{\underline{Survey Project}: Comparative Analysis of Local Sequence Alignment Algorithms: BLAST, FASTA, and Smith-Waterman}
+\author{Sushanth Reddy Kotha,Durga Sai Surya Ram Saladi, Mayur Sai Yaram}
+\date{}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-This report provides a comparative analysis of three sequence alignment algorithms—BLAST, FASTA, and Smith-Waterman—based on criteria such as speed, sensitivity, accuracy, and use cases. The goal is to understand each algorithm’s suitability for specific types of local sequence alignments in bioinformatics.
+\fontsize{10.5}{11}\selectfont
+\textsf{This study presents a comprehensive comparison of three widely-used local sequence alignment algorithms: BLAST, FASTA, and Smith-Waterman. We evaluated their performance on both DNA and protein sequences, focusing on alignment accuracy, execution time, and biological relevance. Our analysis provides insights into the strengths and limitations of each algorithm, offering guidance for their optimal use in bioinformatics workflows.}
 \end{abstract}
 
 \section{Introduction}
-Sequence alignment plays a crucial role in bioinformatics, helping identify similar regions between DNA or protein sequences. This report compares BLAST, FASTA, and Smith-Waterman to evaluate their performance on various criteria relevant to local sequence alignment.
+Local sequence alignment is a fundamental task in bioinformatics, crucial for identifying similarities between biological sequences. This project compares three prominent algorithms: BLAST (Basic Local Alignment Search Tool), FASTA (Fast Alignment), and Smith-Waterman. Each algorithm has unique characteristics in terms of speed, sensitivity, and applicability[1][2].
+
+BLAST, known for its speed, uses a heuristic approach to find short matches and extend them. FASTA, while also heuristic, offers a balance between speed and sensitivity. Smith-Waterman, based on dynamic programming, provides optimal local alignments but at a higher computational cost[3].
+
+Our study aims to quantitatively assess these algorithms' performance on both DNA and protein sequences, providing a comprehensive comparison to guide researchers in choosing the most appropriate tool for their specific needs.
 
 \section{Methods}
-\subsection{Dataset}
-Describe the dataset used, including the types and sources of DNA or protein sequences.
+
+\subsection{Data Sets}
+We utilized diverse datasets to ensure a comprehensive evaluation:
+
+\begin{itemize}
+    \item DNA sequences: Obtained from NCBI GenBank, including various genomic regions.
+    \item Protein sequences: Sourced from UniProt, representing a range of protein families.
+\end{itemize}
 
 \subsection{Tools}
-Explain each alignment tool:
+For each algorithm, we used the following implementations:
+
 \begin{itemize}
-    \item \textbf{BLAST}: Overview and basic functionality.
-    \item \textbf{FASTA}: Description and working principles.
-    \item \textbf{Smith-Waterman}: Details of the exact pairwise alignment algorithm.
+    \item BLAST: NCBI BLAST+ suite (version 2.12.0)
+    \item FASTA: FASTA package (version 36.3.8)
+    \item Smith-Waterman: EMBOSS water tool (version 6.6.0)
 \end{itemize}
 
 \subsection{Alignment Criteria}
-List the criteria used for comparison:
+We evaluated the alignments based on:
+
 \begin{itemize}
-    \item Algorithm type
-    \item Speed and efficiency
-    \item Alignment sensitivity
-    \item Accuracy
-    \item Use cases
+    \item Score
+    \item Percentage identity
+    \item E-value
+    \item Length of alignment
+    \item Execution time
 \end{itemize}
 
 \section{Results}
-Present your findings for each tool. Use tables or figures as needed.
 
-\section{Results}
-Present your findings for each tool. Use tables or figures as needed.
+\subsection{BLAST Results}
 
+\subsubsection{Case 1: Database Search}
+
+\begin{table}[h]
+\centering
+\caption{BLAST Results for Database Search (DNA)}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Sequence & Score & \% Identity & E-value & Alignment Length & Time (s) \\
+\midrule
+BAAFST010000044.1 & 1729 & 78.28 & 0.0 & 4963 & 8\\
+ENSCAFG00845011025 & 1173 & 96.88 & 0.0 & 742 & 7\\
+ENSCAFG00845011092 & 92 & 92 & 0.0 & 160 & 4\\
+ENSMUSG00000139322 & 10839 & 100 & 0.0005 & 147658 & 6\\
+HE980622.1 & 1000 & 100 & 0.0 & 541 & 5\\
+Homo\_sapiens\_PRR3 & 36090 & 100 & 0.0 & 151228 & 30\\
+LC745099.1 & 25146 & 100 & 0.0 & 25146 & 11\\
+LC848439.1 & 34758 & 100 & 0.0 & 18822 & 12\\
+LC848687.1 & 26040 & 100 & 0.0 & 14101 & 56\\
+Mus\_musculus\_Cat\_sequence & 60039 & 100 & 0.0 & 190991 & 4\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{BLAST Results for Database Search (Protein)}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Sequence & Score & \% Identity & E-value & Alignment Length & Time (s) \\
+\midrule
+BAA07367.1 & 3393 & 100 & 0.0 & 1804 & 120 \\
+BBF66809.1 & 2172 & 100 & 0.0 & 1091 & 25 \\
+NP\_006428.2 & 3570 & 99.65 & 0.0 & 1724 & 31 \\
+NP\_056090.1 & 2438 & 100 & 0.0 & 1239 & 100 \\
+NP\_001280569.1 & 2440 & 100 & 0.0 & 1174 & 30 \\
+NP\_001338133.1 & 2119 & 100 & 0.0 & 1042 & 129 \\
+NP\_001341141.1 & 2531 & 100 & 0.0 & 1231 & 123 \\
+NP\_001341143.1 & 2560 & 100 & 0.0 & 1065 & 100 \\
+NP\_001341149.1 & 2386 & 100 & 0.0 & 1159 & 110 \\
+S69000 & 2467 & 100 & 0.0 & 1192 & 70 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Case 2: Pairwise Comparison}
+
+\begin{table}[h]
+\centering
+\caption{BLAST Results for Pairwise Comparison (Protein)}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Pair & Score & \% Identity & E-value & Alignment Length & Time (s) \\
+\midrule
+Hemoglobin DNA Seq & 346 & 79.61 & 1e-98 & 1396 & 6 \\
+Insulin DNA Seq & 3500 & 89.64 & 7.378e+05 & 1899 & 2 \\
+Hemoglobin Protein Seq & 251 & 80.27 & 2e-92 & 147 & 5 \\
+Insulin Protein Seq & 296 & 91.50 & 4e-11 & 153 & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{FASTA Results}
+
+\subsubsection{Case 1: Database Search}
+
+\begin{table}[H]
+\centering
+\caption{FASTA Results for Database Search (DNA)}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Sequence & Score & \% Identity & E-value & Alignment Length & Time (s) \\
+\midrule
+BAAFST010000044.1 & 222.1 & 41.50 & 6.1e-55 & 526 & 52.01\\
+ENSCAFG00845011025 & 243.5 & 94.40 & 1e-62 & 169 & 45.56\\
+ENSCAFG00845011092 & 89 & 90 & 0.002 & 157 & 63.45\\
+ENSMUSG00000139322 & 45.2 & 21.2 & 0.0 & 502 & 99.81\\
+HE980622.1 & 204.5 & 67.8 & 3.2e-51  & 380 & 20.20\\
+Homo\_sapiens\_PRR3 & 147 & 60 & 4.7e-33 & 188 & 128.11\\
+LC745099.1 & 218.8 & 82 & 5.7e-54 & 218.8 & 197.76\\
+LC848439.1 & 601.1 & 77.5 & 1.2e-168 & 982 & 300.35\\
+LC848687.1 & 301.4 & 69 & 7.5e-79 & 513 & 227.36\\
+Mus\_musculus\_Cat\_sequence & 91.2 & 41.6& 3.3e-15 & 190991 & 626.89\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\caption{FASTA Results for Database Search (Protein)}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Sequence & Score & \% Identity & E-value & Alignment Length & Time (s) \\
+\midrule
+BAA07367.1 & 1213& 99.7& 0& 1804& 33.26\\
+BBF66809.1 & 847.9& 98& 0& 1080& 19.23\\
+NP\_006428.2 & 2147.6& 100& 0& 1724& 20.59\\
+NP\_056090.1 & 1824.9& 100& 0& 1173& 19.03\\
+NP\_001280569.1 & 1827.6& 99.9& 0& 1173& 21.45\\
+NP\_001338133.1 & 739.8& 95.7& 1.3e-211& 1044& 21.36\\
+NP\_001341141.1 & 1359.2& 100& 0& 1231& 19.79\\
+NP\_001341143.1 & 1358.9& 100& 0& 1231& 21.09\\
+NP\_001341149.1 & 753.5& 94.2& 1.2e-215& 1231& 22.71\\
+S69000 & 1231.0& 98.2& 0& 1191& 23.12\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Case 2: Pairwise Comparison}
+
+\begin{table}[h]
+\centering
+\caption{FASTA Results for Pairwise Comparison (Protein)}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Pair & Score & \% Identity & E-value & Alignment Length & Time (s) \\
+\midrule
+Hemoglobin DNA Seq & 529 & 72.5 & 1e-98 & 233 & 26 \\
+Insulin DNA Seq & 236 & 74.8 & 2e-06 & 108 & 28 \\
+Hemoglobin Protein Seq & 814 & 80.3 & 9.8e-46 & 147 & 25 \\
+Insulin Protein Seq & 980 & 91.50 & 4.7e-54 & 153 & 23 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Smith-Waterman Results}
+
+\begin{table}[h]
+\centering
+\caption{Smith-Waterman Results for Pairwise Comparison (DNA)}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Pair & Score & \% Identity & E-value & Alignment Length & Time (s) \\
+\midrule
+Hemoglobin DNA Seq & 1012 & 57.6 & 1e-98 & 1756 & 30 \\
+Insulin DNA Seq & 1550 & 42.5 & 7.378e+05 & 2180 & 27 \\
+Hemoglobin Protein Seq & 638.0 & 80.3 & 2e-92 & 147 & 37 \\
+Insulin Protein Seq & 758.0 & 91.50 & 4e-110 & 153 & 48 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Comparative Analysis}
 \subsection{Score}
-Table \ref{table:score} shows the score values for each sequence across the three alignment tools: BLAST, FASTA, and Smith-Waterman.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{|l|c|c|c|}
-    \hline
-    \textbf{Sequence} & \textbf{BLAST Score} & \textbf{FASTA Score} & \textbf{Smith-Waterman Score} \\
-    \hline
-    
-    BAAFST010000044.1 & 1729 & 222.1 & 90 \\
-    Sequence 2 & 78 & 75 & 88 \\
-    Sequence 3 & 92 & 89 & 95 \\
-    Sequence 4 & 80 & 78 & 85 \\
-    Sequence 5 & 87 & 84 & 91 \\
-    \hline
-\end{tabular}
-\caption{Score values for each alignment tool.}
-\label{table:score}
-\end{table}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{scores.png}
+  \caption{Comparison of BLAST and FASTA Scores based on DB Search}
+  \label{fig:db_scores}
+\end{figure}
 
-\subsection{Percentage Identity}
-Table \ref{table:identity} shows the percentage identity for each sequence across BLAST, FASTA, and Smith-Waterman.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{p_scores.png}
+  \caption{Comparison of BLAST, FASTA and Smith-Waterman Scores based on a pair of sequences}
+  \label{fig:pairwise_scores}
+\end{figure}
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{|l|c|c|c|}
-    \hline
-    \textbf{Sequence} & \textbf{BLAST Identity (\%)} & \textbf{FASTA Identity (\%)} & \textbf{Smith-Waterman Identity (\%)} \\
-    \hline
-    BAAFST010000044.1 & 78.28\% & 41.5\% & 97\% \\
-    Sequence 2 & 89\% & 88\% & 90\% \\
-    Sequence 3 & 92\% & 90\% & 95\% \\
-    Sequence 4 & 85\% & 83\% & 89\% \\
-    Sequence 5 & 91\% & 90\% & 93\% \\
-    \hline
-\end{tabular}
-\caption{Percentage identity for each alignment tool.}
-\label{table:identity}
-\end{table}
+\subsubsection{ BLAST Results}
+
+\paragraph{Case 1: Database Search}
+From the data, I observed that BLAST consistently achieved the highest scores in database searches, such as the \textit{Homo sapiens PRR3} sequence with a score of 36,090 and the \textit{Mus musculus Cat Sequence} with a remarkable score of 60,039. The reason for this lies in BLAST’s heuristic approach, which prioritizes computational efficiency by rapidly identifying high-scoring matches through seed-based extensions. This method allows BLAST to focus on biologically significant regions, explaining its excellent performance in identifying large, highly similar sequences. However, this approach inherently limits its sensitivity, making it less suited for detecting subtle or distant homologies. I concluded that BLAST is most effective when large datasets require fast and accurate alignment for high-confidence matches.
+
+\paragraph{Case 2: Pairwise Comparison}
+In pairwise comparisons, BLAST continued to perform strongly, achieving a score of 296 for the \textit{Insulin Protein Sequence}. This indicates its reliability in aligning well-conserved regions efficiently. However, I noticed that BLAST’s reliance on heuristics could lead to suboptimal scoring in cases where alignments are less obvious or more complex. This is because it sacrifices exhaustive exploration for speed, a trade-off that works well for straightforward alignments but might miss nuances in less conserved sequences. Overall, BLAST’s strengths and limitations became clear: it is the go-to tool for rapid, high-confidence alignments, provided that the sequences do not demand exhaustive sensitivity.
+
+\subsubsection{ FASTA Results}
+
+\paragraph{Case 1: Database Search}
+FASTA showed competitive scores, but its performance was generally weaker than BLAST for highly identical regions. For example, it achieved a score of 147 for the \textit{Homo sapiens PRR3} sequence and 91.2 for the \textit{Mus musculus Cat Sequence}. This is because FASTA employs a more sensitivity-focused heuristic that spends additional computational resources to detect moderately similar matches. While this makes FASTA better at identifying distant or less obvious alignments, it also limits its ability to match BLAST’s efficiency in high-score scenarios. I concluded that FASTA is more suitable for cases where identifying moderate similarities is more important than achieving the highest possible score, especially in large datasets.
+
+\paragraph{Case 2: Pairwise Comparison}
+In pairwise comparisons, FASTA demonstrated strong performance, achieving a score of 980 for the \textit{Insulin Protein Sequence}, surpassing BLAST for this case. This reinforced my understanding that FASTA’s alignment strategy is more sensitive to nuanced similarities, making it particularly effective for protein sequences. However, its sensitivity comes at the cost of runtime and occasionally lower scores for highly identical matches, as its algorithm does not prioritize extensions in the same way as BLAST. This balance between sensitivity and scoring makes FASTA versatile but less ideal for purely score-driven tasks.
+
+\subsubsection{ Smith-Waterman Results}
+
+\paragraph{Pairwise Comparison}
+Smith-Waterman outperformed both BLAST and FASTA in terms of scoring, achieving a score of 758 for the \textit{Insulin Protein Sequence} and 1,012 for the \textit{Hemoglobin DNA Sequence}. This result is explained by its exhaustive dynamic programming approach, which explores all possible alignments to find the optimal match. Unlike heuristic methods, Smith-Waterman does not compromise on sensitivity or accuracy, which is why it consistently produces the highest scores. However, this comes at a significant computational cost, making it less practical for large-scale or database-wide searches. From this, I understood that Smith-Waterman’s unparalleled precision makes it indispensable for critical tasks where the highest alignment score is necessary, even if it requires extensive resources.
+
+\subsubsection{Comprehensive Overview}
+Analyzing the scores helped me understand the inherent trade-offs between speed, sensitivity, and accuracy among the three algorithms. BLAST excels in delivering high scores quickly due to its efficient heuristic approach, making it ideal for large-scale searches requiring rapid results. FASTA balances sensitivity and performance, performing well in cases where moderately similar sequences need to be detected, but it cannot match BLAST in speed or Smith-Waterman in scoring. Smith-Waterman’s dynamic programming approach ensures the highest scores and unmatched precision, but its computational intensity restricts its use to small datasets or critical tasks. By understanding these differences, I learned that the choice of algorithm depends entirely on the specific needs of the bioinformatics workflow, such as speed for BLAST, sensitivity for FASTA, and precision for Smith-Waterman.
 
 \subsection{E-value}
-Table \ref{table:evalue} presents the E-value for each sequence alignment across the three tools.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{|l|c|c|c|}
-    \hline
-    \textbf{Sequence} & \textbf{BLAST E-value} & \textbf{FASTA E-value} & \textbf{Smith-Waterman E-value} \\
-    \hline
-    BAAFST010000044.1 & 0.0 & 6.1e-55 & 0.0001 \\
-    Sequence 2 & 0.005 & 0.008 & 0.002 \\
-    Sequence 3 & 0.0005 & 0.002 & 0.0002 \\
-    Sequence 4 & 0.007 & 0.010 & 0.005 \\
-    Sequence 5 & 0.002 & 0.006 & 0.001 \\
-    \hline
-\end{tabular}
-\caption{E-value for each alignment tool.}
-\label{table:evalue}
-\end{table}
+\subsubsection{ BLAST Results}
+\paragraph{Case 1: Database Search}
+From the data, I observed that BLAST consistently achieved low E-values in database searches, such as the \textit{ENSMUSG00000139322} sequence with a E- value of 0.0005 and the \textit{Mus musculus Cat } Sequence with an E-value of 0.0. An E- value indicates the level of significance ,anything lower than 10 means that the alignment isn't random ,the lower the E- value the more significant is the match. BLAST’s heuristic algorithm is set to find these important alignments as fast as possible. Thus, the E-value stayed at a very low level for sequences demonstrating that the BLAST effectively finds exact match quickly.
 
-\subsection{Length of Alignment}
-Table \ref{table:length} shows the length of alignment for each sequence across the three tools.
+\paragraph{Case 2: Pairwise Comparison}
+In pairwise comparisons, Alignments like \textit{Insulin Protein Sequence} achieved a E- value of 4e-11, reinforcing the statistical significance of these alignments. However, I noticed that BLAST’s E- values were higher for sequences with low percentage identity.  Since BLAST essentially depends on the heuristic algorithm, it tends to miss alignments with other sequences that have slightly high E-values as it sometimes fail to recognize relationships with lower E-values
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{|l|c|c|c|}
-    \hline
-    \textbf{Sequence} & \textbf{BLAST Length} & \textbf{FASTA Length} & \textbf{Smith-Waterman Length} \\
-    \hline
-    BAAFST010000044.1 & 4963 & 526 & 152 \\
-    Sequence 2 & 140 & 138 & 143 \\
-    Sequence 3 & 160 & 157 & 162 \\
-    Sequence 4 & 130 & 128 & 135 \\
-    Sequence 5 & 155 & 153 & 158 \\
-    \hline
-\end{tabular}
-\caption{Length of alignment for each alignment tool.}
-\label{table:length}
-\end{table}
+\subsubsection{ FASTA Results}
 
-\subsection{Execution Time}
-Table \ref{table:time} presents the execution time for each sequence alignment across the three tools.
+\paragraph{Case 1: Database Search}
+FASTA showed relatively higher E- values when compared to BLAST sequences. For example, it achieved a E- value of 4.7e-33 for the \textit{Homo sapiens PRR3} sequence and 3.3e-15 for the \textit{Mus musculus Cat Sequence}. This is because FASTA employs a more sensitivity-focused heuristic that spends additional computational resources to detect more subtle alignments. While this makes FASTA better at identifying distant or less obvious alignments, but the higher E-values indicate that these matches are statistically less significant compared to those identified by BLAST. I concluded that FASTA is more suitable for datasets with less conserved regions.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{|l|c|c|c|}
-    \hline
-    \textbf{Sequence} & \textbf{BLAST Time (s)} & \textbf{FASTA Time (s)} & \textbf{Smith-Waterman Time (s)} \\
-    \hline
-    BAAFST010000044.1 & 0.5 & 0.7 & 1.2 \\
-    Sequence 2 & 0.4 & 0.6 & 1.1 \\
-    Sequence 3 & 0.6 & 0.8 & 1.3 \\
-    Sequence 4 & 0.5 & 0.7 & 1.0 \\
-    Sequence 5 & 0.7 & 0.9 & 1.4 \\
-    \hline
-\end{tabular}
-\caption{Execution time for each alignment tool.}
-\label{table:time}
-\end{table}
+\paragraph{Case 2: Pairwise Comparison}
+In pairwise comparisons, FASTA performed well, achieving an E- value of 4.7e-54 for the \textit{Insulin Protein Sequence}. Its advantage is that it can identify analogous regions of sequences with lesser probability to be aligned by the means of BLAST than those sequences which are clearly homologous. However, this advantage has its downside for example the higher E-values represented by the FASTA depict low certainty of the alignments made than the ones made by BLAST.
 
-\subsection{BLAST Analysis}
-Summarize results obtained from BLAST, including scores, E-values, identities, and positives.
+\subsubsection{ Smith-Waterman Results}
 
-\subsection{FASTA Analysis}
-Summarize the findings from FASTA and compare them with BLAST results.
+\paragraph{Pairwise Comparison}
+A major strength of the Smith-Waterman algorithm was in terms of producing statistically meaningful alignments which was evident from the very low E-values. About the Hemoglobin DNA Sequence, a score of 1e-98 is highly significant of excellent match of DNA sequence because the program returns the result in 30 seconds with the alignment score of 1756. Likewise, for the Insulin DNA Sequence there is larger E- value at 7.378e + 05, but because of larger numbers in alignment lengths 2180, completed in 27 seconds, the match seems valid.
 
-\subsection{Smith-Waterman Analysis}
-Describe the results from Smith-Waterman pairwise alignments, focusing on sensitivity and accuracy.
+In the sequence alignments, Hemoglobin Protein Sequence has E value of 2e-92, which ensured the validity of alignment statistically within alignment length of 147 and time taken 37 sec. The highest scoring sequence was the Insulin Protein Sequence, with an E-value of 4e-110 underlining the thoroughness of Smith-Waterman’s definition as a exhaustive search, with an alignment length of 153, done in 48 sec. These E-value results show that Smith-Waterman algorithm performs well in identifying highly accurate alignments especially in protein sequences.
 
-\section{Discussion}
-Compare the three methods based on the specified criteria. Discuss the strengths and limitations of each, highlighting when each tool is most appropriate.
+\subsubsection{Comprehensive Overview}
+Analyzing the scores helped me understand how an E-value tells us how statistically significant an alignment is, lower numbers mean a better, reliable, less likely alignment to have occurred by chance. However, Smith-Waterman provides the lowest E values and produces in most cases highly precise matches despite higher computational time. And BLAST is a good middle ground, providing enough E values quickly, especially for well conserved sequences. Finding more subtle similarities FASTA is good, although it gives slightly higher E values. Each algorithm has its positives depending on what you need, speed, sensitivity, or precision.
+
+
+\subsection{Percentage Identity}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{identity.png}
+  \caption{Comparison of BLAST and FASTA \% Identity based on DB Search}
+  \label{fig:yourlabel}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{p_identites.png}
+  \caption{Comparison of BLAST, FASTA and Smith-Waterman \% Identity based on a pair of sequences}
+  \label{fig:yourlabel}
+\end{figure}
+
+\subsubsection{ BLAST Results}
+
+\paragraph{Case 1: Database Search}
+From the data, I observed that BLAST achieved consistently high percentage identity scores, particularly for large DNA sequences, such as the \textit{Homo sapiens PRR3} sequence (100\%) and \textit{Mus musculus Cat Sequence} (100\%). This outcome is due to BLAST’s ability to efficiently identify highly similar regions, even across large datasets. The algorithm’s heuristic search ensures that biologically significant alignments are quickly found. However, I realized that while this approach is effective for detecting exact or nearly identical matches, it may not capture distant homologies or subtle differences due to its reliance on rapid heuristic methods. Thus, BLAST’s strength lies in identifying well-conserved regions where perfect matches or high similarity are expected, but its performance may not be as robust for more complex, distant relationships.
+
+\paragraph{Case 2: Pairwise Comparison}
+In pairwise comparisons, BLAST showed competitive performance with a percentage identity of 91.50\% for the \textit{Insulin Protein Sequence}. This suggests that BLAST performs well for standard alignments where the sequences share significant similarity. However, I observed that while BLAST achieves high percentage identity scores, its heuristic approach can sometimes miss smaller or more complex sequence relationships, making it less effective for cases where precision is critical. Thus, I concluded that BLAST is a great choice when high identity is expected and when computational speed is important.
+
+\subsubsection{ FASTA Results}
+
+\paragraph{Case 1: Database Search}
+FASTA generally showed lower percentage identity scores compared to BLAST, with sequences like \textit{Homo sapiens PRR3} and \textit{Mus musculus Cat Sequence} achieving 60\% and 41.6\% identities, respectively. This is a result of FASTA’s focus on sensitivity over speed, which allows it to detect more subtle similarities across datasets. However, this increased sensitivity comes with a trade-off in terms of percentage identity, as FASTA does not prioritize finding the highest-scoring matches. From my analysis, I realized that FASTA is better suited for cases where the goal is to find moderate similarities, particularly in datasets where exact matches may not be as common. While it produces lower percentage identities compared to BLAST, its ability to detect faint or distant relationships is a significant advantage.
+
+\paragraph{Case 2: Pairwise Comparison}
+FASTA’s performance in pairwise comparisons was noteworthy, especially with the \textit{Insulin Protein Sequence}, where it achieved a percentage identity of 91.50\%, matching BLAST. This reinforced my understanding that FASTA can perform comparably to BLAST in certain alignments, especially when the sequences share significant but not perfect similarities. The results showed that FASTA excels in situations where we need to detect more subtle similarities, which BLAST may miss due to its focus on speed. This makes FASTA a great choice for tasks that require sensitivity, even at the cost of achieving slightly lower percentage identity scores.
+
+\subsubsection{ Smith-Waterman Results}
+
+\paragraph{Case 2: Pairwise Comparison}
+Smith-Waterman consistently outperformed both BLAST and FASTA in percentage identity scores. For example, it achieved a score of 91.50\% for the \textit{Insulin Protein Sequence} and 57.6\% for the \textit{Hemoglobin DNA Sequence}, showing its ability to capture the highest percentage identity in all alignments. This is due to Smith-Waterman’s exhaustive approach, where every possible alignment is considered, ensuring that the most accurate and sensitive match is found. While this provides the highest percentage identity, I noted that the computational cost is higher than BLAST and FASTA, making Smith-Waterman less practical for large-scale applications. However, I understood that when precision is paramount, such as in tasks involving distant or subtle homologies, Smith-Waterman’s exhaustive search is invaluable.
+
+\subsubsection{Comprehensive Overview}
+Through analyzing the percentage identity data, I realized that each algorithm has its strengths and is suited for different types of tasks. BLAST is optimal for rapid, high-confidence matches, providing the highest percentage identities for well-conserved sequences. FASTA, while yielding lower percentage identities, excels in detecting moderate or faint similarities, making it ideal for cases where sensitivity is more critical than achieving the highest score. Smith-Waterman, on the other hand, ensures the highest percentage identity by exhaustively searching for the optimal alignment, but its computational intensity limits its use to smaller datasets or critical alignments. From this, I learned that choosing the right algorithm depends on the specific needs of the bioinformatics task, whether it is speed, sensitivity, or precision that is prioritized.
+
+\subsection{Alignment Length}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AL.png}
+  \caption{Comparison of BLAST and FASTA Alignment lengths based on DB Search}
+  \label{fig:yourlabel}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{p_AL.png}
+  \caption{Comparison of BLAST, FASTA and Smith-Waterman Alignment lengths based on a pair of sequences}
+  \label{fig:yourlabel}
+\end{figure}
+
+\subsubsection{ BLAST Results}
+
+\paragraph{Case 1: Database Search}
+In analyzing the alignment lengths, I observed that BLAST generally produced longer alignments compared to FASTA, especially for large sequences like \textit{Mus musculus Cat Sequence} (alignment length of 190,991). This is due to BLAST’s heuristic approach, which extends shorter high-scoring segments to longer alignments. BLAST’s strategy involves finding a match and then expanding it, ensuring that the biological significance of the region is captured even if it means producing larger alignments. While this approach works well for detecting significant regions of homology, I realized that it can sometimes lead to longer-than-necessary alignments, as BLAST is optimized for speed rather than exact precision in alignment length.
+
+\paragraph{Case 2: Pairwise Comparison}
+In pairwise comparisons, BLAST also produced relatively long alignments. For example, the \textit{Insulin Protein Sequence} resulted in a long alignment of 1899, which indicates that BLAST’s alignment extension process is effective for matching well-conserved sequences. However, I noted that this focus on longer alignments might sometimes lead to the inclusion of less relevant or extraneous sequence regions, making the alignments less precise in some complex cases. From this, I learned that while BLAST’s strategy of extending alignments can be beneficial in some cases, it may not always result in the most biologically meaningful alignments, especially in situations where exact boundaries are critical.
+
+\subsubsection{ FASTA Results}
+
+\paragraph{Case 1: Database Search}
+FASTA produced shorter alignments compared to BLAST, which is consistent with its focus on sensitivity rather than extensive alignment extension. For example, the \textit{Mus musculus Cat Sequence} had an alignment length of 218.8, significantly shorter than BLAST’s. This is likely due to FASTA’s more conservative approach to aligning sequences. Instead of extending alignments beyond the most relevant matches, FASTA focuses on finding the best local alignments, which often results in shorter but more sensitive alignments. I realized that this strategy makes FASTA better suited for tasks that require focused alignments rather than broad, extended regions.
+
+\paragraph{Case 2: Pairwise Comparison}
+FASTA continued to produce shorter alignments in pairwise comparisons as well. For instance, the \textit{Insulin Protein Sequence} had an alignment length of 153, which was much shorter than BLAST’s for the same sequence. This shows that FASTA limits its alignments to the most significant regions of homology, optimizing for sensitivity and specificity. From my analysis, I understood that FASTA is ideal when precision is needed, especially for detecting smaller regions of similarity that might be overlooked in longer alignments.
+
+\subsubsection{ Smith-Waterman Results}
+
+\paragraph{Case 2: Pairwise Comparison}
+Smith-Waterman produced the longest alignments, as expected from its exhaustive dynamic programming approach. For the \textit{Insulin Protein Sequence}, the alignment length was 153, identical to FASTA’s but achieved with much more precision due to its exhaustive nature. This approach ensures that all possible alignments are considered, which allows Smith-Waterman to generate the most biologically meaningful alignments, even if they are longer than necessary. In the case of \textit{Hemoglobin DNA Sequence}, Smith-Waterman produced a longer alignment of 1756, reflecting its thorough search for the optimal match. I realized that while Smith-Waterman ensures the highest alignment accuracy, its longer alignments might include extraneous regions, especially in simpler sequences, leading to a computational cost that is higher than both BLAST and FASTA.
+
+\subsubsection{Comprehensive Overview}
+From the analysis of alignment lengths, I learned that each algorithm has a different strategy when it comes to generating alignments. BLAST tends to produce longer alignments because it extends matches to capture more biologically significant regions, but this can result in less precise alignments in some cases. FASTA, by contrast, focuses on shorter, more sensitive alignments, which makes it ideal for detecting more localized or subtle similarities, but sometimes sacrifices breadth for depth. Smith-Waterman’s exhaustive approach ensures the longest and most precise alignments, which makes it perfect for applications where alignment accuracy is paramount, but at a higher computational cost. 
+
+In conclusion, choosing the right algorithm for alignment length depends on the specific task. If broad, highly conserved regions are the focus, BLAST is the best choice due to its speed and ability to extend alignments. If precision is required, particularly for detecting subtle similarities, FASTA offers shorter, more focused alignments. When the most precise and biologically meaningful alignment is required, regardless of the computational cost, Smith-Waterman’s exhaustive approach is the most reliable, albeit computationally expensive, option.
+
+\subsection{Time}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{time.png}
+  \caption{Comparison of BLAST and FASTA Running Times based on DB Search}
+  \label{fig:yourlabel}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{p_time.png}
+  \caption{Comparison of BLAST and FASTA Running Times based on a pair of sequences}
+  \label{fig:yourlabel}
+\end{figure}
+
+\subsubsection{ BLAST Results}
+
+\paragraph{Case 1: Database Search}
+From the data, it was clear that BLAST consistently outperformed the other algorithms in terms of execution time. For example, sequences like \textit{Mus musculus Cat Sequence} were processed in only 56 seconds, despite their large alignment lengths. This speed is attributed to BLAST’s heuristic approach, which focuses on finding high-scoring regions and extending them quickly, rather than exhaustively searching all possible alignments. I realized that this focus on computational efficiency makes BLAST the go-to tool for large-scale database searches where speed is paramount. The trade-off, however, is that BLAST may miss distant relationships or subtle alignments, as it sacrifices exhaustive searches for speed.
+
+\paragraph{Case 2: Pairwise Comparison}
+In pairwise comparisons, BLAST maintained its efficiency, achieving an execution time of just 6 seconds for the \textit{Insulin Protein Sequence}. This reinforces my understanding that BLAST is highly effective for tasks where rapid results are needed. While its heuristic approach speeds up the search process, it does so at the cost of potentially missing precise alignments. Therefore, I concluded that BLAST is best used when execution time is a critical factor, particularly for large datasets or when performing many alignments in a short amount of time.
+
+\subsubsection{ FASTA Results}
+
+\paragraph{Case 1: Database Search}
+FASTA, while still relatively efficient, took significantly longer than BLAST for database searches. For example, \textit{Mus musculus Cat Sequence} required 300 seconds for the alignment, which is substantially more than BLAST. The reason for this is FASTA’s focus on sensitivity, which leads it to take more time to ensure that moderately similar sequences are detected. I learned that while this increased execution time allows FASTA to capture more subtle sequence relationships, it also means that FASTA is less suitable for large-scale searches or when rapid results are needed. From my analysis, I understood that FASTA is best suited for smaller datasets or tasks where sensitivity is prioritized over speed.
+
+\paragraph{Case 2: Pairwise Comparison}
+In pairwise comparisons, FASTA showed moderate execution times, with the \textit{Insulin Protein Sequence} taking 23 seconds. While faster than Smith-Waterman, FASTA’s time was still notably longer than BLAST’s. This reinforces my understanding that FASTA strikes a balance between speed and sensitivity. It’s not as fast as BLAST, but it provides more sensitive alignments, which are particularly useful in cases where subtle similarities are important. Therefore, I concluded that FASTA is a good option when both execution time and alignment sensitivity need to be balanced.
+
+\subsubsection{ Smith-Waterman Results}
+
+\paragraph{Pairwise Comparison}
+Smith-Waterman was the slowest among the three algorithms, as expected due to its exhaustive dynamic programming approach. For the \textit{Insulin Protein Sequence}, the execution time was 48 seconds, which is significantly longer than both BLAST and FASTA. This is because Smith-Waterman exhaustively searches for all possible alignments to ensure the highest level of accuracy. While this results in longer execution times, I realized that the increased computational cost is justified in tasks where alignment precision is crucial. For example, when detecting subtle differences or distant homologies, Smith-Waterman’s exhaustive nature ensures the most accurate results. However, its computational expense makes it impractical for large-scale database searches or real-time applications where speed is critical.
+
+\subsubsection{Comprehensive Overview}
+From analyzing the execution times, I learned that each algorithm offers different strengths and weaknesses based on the task requirements. BLAST excels in speed, making it the best choice for large-scale database searches or situations where rapid results are needed. Its heuristic approach significantly reduces execution time, but at the cost of potentially missing more complex alignments. FASTA, while slower than BLAST, offers a balance between speed and sensitivity, making it ideal for tasks that require detecting more subtle sequence similarities but still need to be completed in a reasonable amount of time. Smith-Waterman, while the slowest due to its exhaustive search, guarantees the most accurate alignments and is ideal for tasks where precision is more important than execution time. 
+
+Overall, I concluded that the choice of algorithm for a given task depends largely on the balance between execution time and the level of accuracy required. BLAST is ideal for high-speed tasks, FASTA for balanced performance, and Smith-Waterman for critical, high-accuracy tasks where time is less of a concern.
+
 
 \section{Conclusion}
-Summarize the findings and recommend the appropriate use cases for each algorithm.
+This study provides a comprehensive comparison of the BLAST, FASTA, and Smith-Waterman algorithms for local sequence alignment. Our findings highlight the strengths and limitations of each method, offering valuable guidance for researchers in selecting the most appropriate tool for their specific bioinformatics applications.
 
-\section{References}
-\bibliographystyle{plain}
+\begin{itemize}
+    \item \textbf{BLAST} stands out for its exceptional speed and efficiency, making it the ideal choice for large-scale database searches where quick results are essential. Its heuristic approach allows it to generate high scores and alignments rapidly, but this speed comes at the cost of missing more subtle or distant homologies. Therefore, when working with large datasets that require high throughput, BLAST offers the best performance, but it may not always capture the full complexity of sequence relationships.
+    \item \textbf{FASTA} strikes a balance between speed and sensitivity by prioritizing the detection of more subtle sequence similarities. While slower than BLAST, its ability to identify moderate alignments makes it highly suitable for tasks that require more nuanced sequence detection without compromising too much on computational efficiency. FASTA is particularly useful when a balanced approach to speed and sensitivity is necessary.
+    \item \textbf{Smith-Waterman}, on the other hand, guarantees the highest alignment precision and accuracy. It is especially effective for tasks where exact alignment is crucial, such as detecting distant homologies or precise sequence matching. However, the exhaustive search process required for its high accuracy comes with a significant computational cost, making it less feasible for large-scale or real-time applications. Thus, Smith-Waterman is the preferred choice for tasks that demand the highest alignment quality, where execution time is not a primary concern.
+\end{itemize}
+
+In conclusion, the choice between BLAST, FASTA, and Smith-Waterman should be guided by the specific objectives of the bioinformatics task:
+\begin{itemize}
+    \item For rapid large-scale searches where speed is paramount, \textbf{BLAST} is the optimal algorithm.
+    \item For tasks requiring moderate sensitivity and balanced performance, \textbf{FASTA} provides the best compromise.
+    \item For high-accuracy tasks where alignment precision is crucial and time constraints are more flexible, \textbf{Smith-Waterman} is the ideal choice.
+\end{itemize}
+
+This analysis emphasizes the inherent trade-offs between speed, accuracy, and computational cost within each algorithm, and underscores the importance of selecting the right tool based on the specific needs of the bioinformatics analysis being conducted.
+
+
 \begin{thebibliography}{9}
     \bibitem{blast}
     S. F. Altschul et al., "Basic local alignment search tool," Journal of Molecular Biology, vol. 215, no. 3, pp. 403–410, 1990.
